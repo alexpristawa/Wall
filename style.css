@@ -1,0 +1,817 @@
+:root {
+    --backgroundColor: rgb(128, 128, 128);
+    --upgradeColor: rgb(54, 173, 162);
+}
+
+* {
+    font-family: "Exo 2", sans-serif;
+    vertical-align: top;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+html,body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    background-color: black;
+    background-size: cover;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+canvas {
+    display: block; /* Removes the margin in some browsers */
+    background: rgb(104, 130, 74); /* Optional: Canvas background color */
+}
+
+body > #main {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 50;
+    transition: background 1500ms ease;;
+    overflow: hidden;
+    display: flex;
+}
+
+#main > #interact::-webkit-scrollbar {
+    display: none;
+}
+
+#main > #interact {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    -ms-overflow-style: none;  /* Internet Explorer and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+#main > #interact > #scrollCount {
+    height: 700vh;
+    width: 100%;
+    pointer-events: all;
+    flex-shrink: 0;
+}
+
+#main > #materials {
+    position: absolute;
+    right: 2vw;
+    bottom: 2vw;
+    width: 10vw;
+    height: 35vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#main > #materials > div {
+    height: 23%;
+    width: 100%;
+    border-radius: 1vh;
+    border: 2px solid rgba(200, 200, 200, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+#main > #materials > div > div.imgHolder {
+    height: 100%;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#main > #materials > div > div.imgHolder > img {
+    width: 90%;
+    height: 90%;
+}
+
+#main > #materials > div > div.numHolder {
+    height: 100%;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(200, 200, 200);
+    font-family: "Bree Serif", serif;
+    font-size: 1.5rem;
+}
+
+#main > #leftSideHolder {
+    position: absolute;
+    left: 1vw;
+    bottom: 1vw;
+    height: 26.6666666666vh;
+    width: 20vh;
+}
+
+#leftSideHolder > #map {
+    position: relative;
+    width: 100%;
+    height: 20vh;
+    background-color: rgba(126, 126, 126, 0.3);
+    border: 1px solid rgb(90, 90, 90);
+    border-radius: 1vh;
+}
+
+#leftSideHolder > #map > #mapPlayer {
+    position: absolute;
+    height: 0.5vh;
+    width: 0.5vh;
+    border-radius: 1vh;
+    background-color: white;
+}
+
+#leftSideHolder > .iconsHolder {
+    width: 100%;
+    height: 6.6666666666vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#leftSideHolder > .iconsHolder > div {
+    height: 80%;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5vh;
+    border: 2px solid rgba(200, 200, 200, 0.7);
+    color: rgb(200, 200, 200);
+    cursor: pointer;
+}
+
+#leftSideHolder > .iconsHolder > div > i {
+    font-size: 1.5rem;
+}
+
+#main > #inventory {
+    position: absolute;
+    width: 60vw;
+    height: 6vw;
+    left: 20vw;
+    bottom: 2vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+
+#main > #inventory > div {
+    height: min-content;
+    width: 10%;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#main > #inventory > div > div {
+    width: 90%;
+    aspect-ratio: 1/1;
+    border: 2px solid rgba(90, 90, 90, 0.5);
+    border-radius: 1vh;
+    cursor: pointer;
+    background-color: rgba(200, 200, 200, 0.2);
+    transition: background 150ms ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    pointer-events: all;
+    margin-top: 5%;
+}
+
+#main > #inventory > div > div > img {
+    width: 60%;
+    height: 60%;
+    opacity: 0.5;
+}
+
+#main > #inventory > div > div:not(.activeTile) {
+    display: none;
+}
+
+#main > #inventory > div:hover > div {
+    display: flex;
+}
+
+#main > #ageHolder {
+    position: absolute;
+    width: 40vw;
+    height: 7vh;
+    left: 30vw;
+    bottom: 8vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#main > #ageHolder > #ageCount {
+    width: 100%;
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 115%;
+    color: rgb(200, 200, 200)
+}
+
+#main > #ageHolder > #ageBar {
+    position: relative;
+    width: 100%;
+    height: 30%;
+    margin-top: 0.6vh;
+    border: 2px solid rgba(200, 200, 200, 0.7);
+    border-radius: 2px;
+}
+
+#main > #ageHolder > #ageBar > div {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    background-color: rgba(200, 200, 200, 0.4);
+}
+
+#infoBoxHolder {
+    position: absolute;
+    width: 17vw;
+    height: 18vw;
+    display: none;
+    flex-direction: column;
+    pointer-events: none;
+}
+
+#infoBoxHolder > .triangleHolder {
+    height: 1vw;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#infoBoxHolder > .triangleHolder > .wrapper {
+    height: 1.41421356237vw;
+    width: 1.41421356237vw;
+    transform: translateY(0.70710678118vw);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#infoBoxHolder > .triangleHolder > .wrapper > div {
+    height: 1.41421356237vw;
+    width: 1.41421356237vw;
+    border: 2px solid rgba(20, 20, 20, 0.8);
+    background-color: rgba(50, 50, 50, 0.85);
+    transform-origin: center;
+    transform: rotate(45deg);
+    pointer-events: all;
+}
+
+#infoBox {
+    width: 100%;
+    height: 17vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 0.5vw;
+    border: 2px solid rgba(20, 20, 20, 0.8);
+    overflow: hidden;
+    pointer-events: all;
+}
+
+#infoBox > .titleHolder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.5rem;
+    background-color: rgba(50, 50, 50, 0.85);
+    width: 100%;
+    height: 15%;
+    font-family: "Bree Serif", serif;
+}
+
+#infoBox > .content {
+    display: flex;
+    background-color: rgba(35, 35, 35, 0.85);
+    width: 100%;
+    height: 85%;
+}
+
+#infoBox > .content > div:nth-child(1) {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    border-right: 1px solid rgba(20, 20, 20, 0.5);
+    width: 50%;
+    height: 100%;
+    padding: 1%;
+}
+
+#infoBox > .content > div:nth-child(1) > .descriptionDiv {
+    width: 100%;
+    height: min-content;
+    display: flex;
+    color: white;
+    font-size: 0.6rem;
+}
+
+#infoBox > .content > div:nth-child(1) > .statsDiv {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+}
+
+#infoBox > .content > div:nth-child(1) > .statsDiv > div {
+    width: 100%;
+    height: min-content;
+    display: flex;
+    align-items: center;
+    color: white;
+    margin-bottom: 5%;
+    font-size: 0.6rem;
+}
+
+#infoBox > .content > div:nth-child(1) > .statsDiv > div > *:not(:first-child) {
+    margin-left: 4%;
+}
+
+#infoBox > .content > div:nth-child(1) > .statsDiv > div > i:nth-child(2) {
+    color: white;
+}
+
+#infoBox > .content > div:nth-child(1) > .statsDiv > div > span {
+    color: white;
+    font-size: 0.8rem;
+    margin-top: -1.1%;
+}
+
+
+#infoBox > .content > div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    box-sizing: border-box;
+    border-left: 1px solid rgba(20, 20, 20, 0.5);
+}
+
+#infoBox > .content > div:nth-child(2) > .upgradeButton {
+    width: 80%;
+    height: 30%;
+    background-color: var(--upgradeColor);
+    border-radius: 0.6vw;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+#infoBox > .content > div:nth-child(2) > .upgradeButton > div:nth-child(1) {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    color: rgb(30, 30, 30);
+}
+
+#infoBox > .content > div:nth-child(2) > .moveButton {
+    width: 80%;
+    height: 30%;
+    background-color: rgb(81, 189, 81);
+    border-radius: 0.6vw;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+#infoBox > .content > div:nth-child(2) > .moveButton > div:nth-child(1) {
+    width: 100%;
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    color: rgb(30, 30, 30);
+}
+
+#infoBox > .content > div:nth-child(2) > .upgradeButton > .upgradeMaterials {
+    width: 100%;
+    height: 45%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    color: white;
+}
+
+#infoBox > .content > div:nth-child(2) > .upgradeButton > .upgradeMaterials > div {
+    width: 50%;
+    height: 50%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#infoBox > .content > div:nth-child(2) > .upgradeButton > .upgradeMaterials > div:nth-child(2n) {
+    justify-content: flex-start;
+}
+
+#infoBox > .content > div:nth-child(2) > .upgradeButton > .upgradeMaterials > div > img {
+    height: 90%;
+    aspect-ratio: 1/1;
+    margin-left: 6%;
+}
+
+#infoBox > .content > div:nth-child(2) > .upgradeButton > .upgradeMaterials > div > div {
+    width: min-content;
+    height: 60%;
+    color: white;
+    font-size: 0.6rem;
+    margin-top: -7%;
+    margin-left: 5%;
+    margin-right: 6%;
+}
+
+#hoverBox {
+    position: absolute;
+    top: 1vh;
+    left: 42.5vw;
+    width: 15vw;
+    height: 17vh;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 0.5vw;
+    border: 2px solid rgba(20, 20, 20, 0.7);
+    overflow: hidden;
+    background-color: rgba(50, 50, 50, 0.7);
+}
+
+#hoverBox > .titleHolder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.8rem;
+    width: 100%;
+    height: 40%;
+    font-family: "Bree Serif", serif;
+}
+
+#hoverBox > div:nth-child(2) {
+    display: flex;
+    height: 60%;
+    width: 100%;
+}
+
+#hoverBox > div:nth-child(2) > .descriptionHolder {
+    display: flex;
+    justify-content: center;
+    width: 60%;
+    height: 100%;
+    color: white;
+    font-size: 0.7rem;
+    box-sizing: border-box;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 4%;
+    background-color: rgba(35, 35, 35, 0.7);
+    border-top: 2px solid rgba(20, 20, 20, 0.7);
+    border-right: 2px solid rgba(20, 20, 20, 0.7);
+    border-top-right-radius: 7px;
+}
+
+#hoverBox > div:nth-child(2) > .materialsHolder {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2%;
+}
+
+#hoverBox > div:nth-child(2) > .materialsHolder > div {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 8%;
+}
+
+#hoverBox > div:nth-child(2) > .materialsHolder > div > img{
+    height: 100%;
+    aspect-ratio: 1/1;
+    margin-right: 5%;
+}
+
+#hoverBox > div:nth-child(2) > .materialsHolder > div > p{
+    color: white;
+}
+
+#shop {
+    position: absolute;
+    top: 20vh;
+    left: 20vw;
+    height: 60vh;
+    width: 60vw;
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 2vh;
+    display: none;
+    flex-direction: column;
+    border: 3px solid rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+}
+
+#shop > .sectionHolder {
+    height: 10%;
+    width: 100%;
+    display: flex;
+}
+
+#shop > .sectionHolder > div {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+    border-top-left-radius: 2vh;
+    border-top-right-radius: 2vh;
+    cursor: pointer;
+    transition: background 200ms ease;
+    color: rgb(210, 210, 210);
+}
+
+#shop > .listHolder {
+    height: 90%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 2%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+#shop > .listHolder > div {
+    height: 30%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    color: rgb(210, 210, 210);
+    margin-bottom: 3%;
+    border-radius: 0.5vh;
+    transition: background 100ms ease;
+}
+
+#shop > .listHolder > div:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+#shop > .listHolder > div > div:nth-child(1) {
+    height: 100%;
+    width: 20%;
+    display: flex;
+    align-items: center;
+}
+
+#shop > .listHolder > div > div:nth-child(1) > img {
+    height: 90%;
+    aspect-ratio: 1/1;
+    margin-left: 5%;
+}
+
+#shop > .listHolder > div > div:nth-child(2), #shop > .listHolder > div > div:nth-child(4) {
+    width: min-content;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#shop > .listHolder > div > div:nth-child(2) > div, #shop > .listHolder > div > div:nth-child(4) > div{
+    height: 25%;
+    width: min-content;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+#shop > .listHolder > div > div:nth-child(2) > div > i {
+    margin-right: 0.5vw;
+}
+
+#shop > .listHolder > div > div:nth-child(3) {
+    width: min-content;
+    margin-left: 1.5%;
+    margin-right: 1.5%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#shop > .listHolder > div > div:nth-child(3) > i{
+    font-size: 2rem;
+}
+
+#shop > .listHolder > div > .upgradeButton {
+    width: 15%;
+    height: 60%;
+    margin-left: 5%;
+    background-color: var(--upgradeColor);
+    border-radius: 1vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+}
+
+#shop > .listHolder > div > .upgradeButton > div:nth-child(1) {
+    height: 35%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    color: rgb(30, 30, 30);
+}
+
+#shop > .listHolder > div > .upgradeButton > div:nth-child(2) {
+    height: 35%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 3%;
+}
+
+#shop > .listHolder > div > .upgradeButton > div:nth-child(2) > img {
+    height: 75%;
+    aspect-ratio: 1/1;
+    margin-top: 1.6%;
+    margin-right: 3%;
+}
+
+#shop > .listHolder > div > .upgradeButton > div:nth-child(2) > span {
+    font-size: 1rem;
+    color: white;
+}
+
+#nightDisplayHolder {
+    position: absolute;
+    top: 1vh;
+    right: 1vh;
+    height: 28vh;
+    width: 20vh;
+}
+
+#nightDisplayHolder > #nightDisplay {
+    position: relative;
+    height: 20vh;
+    width: 20vh;
+    border-radius: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#nightDisplayHolder > #nightDisplay > div {
+    position: relative;
+    height: 100%;
+    width: 50%;
+    overflow: hidden;
+}
+
+#nightDisplayHolder > #nightDisplay > div:nth-child(1) > div {
+    position: absolute;
+    top: 0vh;
+    left: 0vh;
+    height: 100%;
+    width: 200%;
+    background: radial-gradient(circle, transparent 45%, black 45% 50%, rgb(19,24,98) 50% 65.7106781187%, black 65.7106781187%);
+}
+
+#nightDisplayHolder > #nightDisplay > div:nth-child(2) > div {
+    position: absolute;
+    top: 0vh;
+    right: 0vh;
+    height: 100%;
+    width: 200%;
+    background: radial-gradient(circle, transparent 45%, black 45% 50%, rgb(91, 164, 217) 50% 65.7106781187%, black 65.7106781187%);
+}
+
+#nightDisplayHolder > #nightDisplay > i.fa-moon {
+    position: absolute;
+    left: 3%;
+    font-size: 1.75rem;
+    color: yellow;
+}
+
+#nightDisplayHolder > #nightDisplay > i.fa-sun {
+    position: absolute;
+    right: 3%;
+    font-size: 1.25rem;
+    color: yellow;
+}
+
+#nightDisplayHolder > .caretHolder {
+    width: 20vh;
+    height: 2.5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#nightDisplayHolder > .caretHolder > i {
+    font-size: 1.5rem;
+    color: white;
+}
+
+#nightDisplayHolder > #nightCount {
+    height: 2.5vh;
+    width: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(235, 235, 235);
+}
+
+#deathDisplay {
+    position: absolute;
+    left: 0;
+    top: 30vh;
+    height: 40vh;
+    width: 100vw;
+    background-color: rgba(0,0,0,0.5);
+    display: none;
+    opacity: 0;
+    flex-direction: column;
+    align-items: center;
+}
+
+#deathDisplay > div:nth-child(1) {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#deathDisplay > div:nth-child(1) > h1 {
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 1%;
+}
+
+#deathDisplay > div:nth-child(1) > p {
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 1%;
+}
+
+#deathDisplay > div:nth-child(2) {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#deathDisplay > div:nth-child(2) > div {
+    margin-top: 2%;
+    height: 40%;
+    width: 10%;
+    background-color: rgb(54, 173, 162);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1vh;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}

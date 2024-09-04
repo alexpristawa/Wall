@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script src="https://kit.fontawesome.com/36713ed0c5.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');  /*  font-family: 'Kalam', cursive;  */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap'); /*  font-family: 'Noto Sans Mono', monospace; */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap'); /*  font-family: 'Noto Serif', serif;  */
+        @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap'); /*  font-family: 'Nunito', sans-serif;  */
+        @import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap'); /*  font-family: 'Parisienne', cursive;  */
+        @import url('https://fonts.googleapis.com/css2?family=Train+One&display=swap'); /* font-family: 'Train One', system-ui; */
+        @import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap'); /* font-family: "Bree Serif", serif; */
+        @import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
+    </style>
+    <title>Wall</title>
+</head>
+<body>
+
+    <div id = "main">
+        <div id = 'interact'>
+            <div id = 'scrollCount'></div>
+        </div>
+
+        <div id = 'deathDisplay' class = 'noClick'>
+            <div>
+                <h1>Game over!</h1>
+                <p>The zombies broke your house.</p>
+            </div>
+            <div>
+                <div class = 'restartButton' onclick = 'Game.newGame()'>Restart</div>
+            </div>
+        </div>
+
+        <div id = 'infoBoxHolder'>
+            <div class = 'triangleHolder'>
+                <div class = 'wrapper'>
+                    <div></div>
+                </div>
+            </div>
+            <div id = 'infoBox' class = 'noClick'>
+                <div class = 'titleHolder'></div>
+                <div class = 'content'>
+                    <div>
+                        <div class = 'descriptionDiv'></div>
+                        <div class = 'statsDiv'></div>
+                    </div>
+                    <div>
+                        <div class = 'upgradeButton' onclick = 'InfoBox.upgradeHandler(event)'>
+                            <div>Upgrade</div>
+                            <div class = 'upgradeMaterials'></div>
+                        </div>
+                        <div class = 'moveButton'>
+                            <div>Move</div>
+                            <div class = 'moveMaterials'></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id = 'hoverBox'>
+            <div class = 'titleHolder'></div>
+            <div>
+                <div class = 'descriptionHolder'></div>
+                <div class = 'materialsHolder'></div>
+            </div>
+        </div>
+
+        <div id = 'shop' class = 'noClick'>
+            <div class = 'sectionHolder'>
+                <div>Weapons</div>
+                <div>Hats</div>
+            </div>
+            <div class = 'listHolder'>
+
+            </div>
+        </div>
+
+        <div id = 'leftSideHolder' class = 'bottomPosition'>
+            <div class = 'iconsHolder'>
+                <div id = 'shopButton' class = 'noClick'>
+                    <i class = 'fas fa-shop'></i>
+                </div>
+            </div>
+            <div id = 'map' class = 'noClick'>
+                <div id = 'mapPlayer'></div>
+            </div>
+        </div>
+
+        <div id = 'ageHolder' class = 'bottomPosition'>
+            <div id = 'ageCount'>Age 1</div>
+            <div id = 'ageBar'>
+                <div></div>
+            </div>
+        </div>
+
+        <div id = 'nightDisplayHolder'>
+            <div id = 'nightDisplay'>
+                <div>
+                    <div></div>
+                </div>
+                <div>
+                    <div></div>
+                </div>
+                <i class = 'fas fa-sun'></i>
+                <i class = 'fas fa-moon'></i>
+            </div>
+            <div class = 'caretHolder'>
+                <i class = 'fas fa-caret-up'></i>
+            </div>
+            <div id = 'nightCount'>Night 0</div>
+        </div>
+        
+        <div id = 'inventory' class = 'bottomPosition'>
+            <div class = 'noClick'>
+                <div class="activeTile"></div><div></div><div></div>
+            </div>
+            <div class = 'noClick'>
+                <div class="activeTile"></div>
+            </div>
+            <div class = 'noClick'>
+                <div class="activeTile"></div>
+            </div>
+            <div class = 'noClick'>
+                <div class="activeTile"></div>
+            </div>
+            <div class = 'noClick'>
+                <div class="activeTile"></div><div></div>
+            </div>
+            <div class = 'noClick'>
+                <div class="activeTile"></div>
+            </div>
+            <div class = 'noClick'>
+                <div class="activeTile"></div>
+            </div>
+            <div class = 'noClick'>
+                <div class="activeTile"></div>
+            </div>
+            <div class = 'noClick'>
+                <div class="activeTile"></div><div></div><div></div><div></div>
+            </div>
+            <div class = 'noClick'>
+                <div class='activeTile'></div><div></div><div></div><div></div>
+            </div>
+        </div>
+        
+        <div id = 'materials' class = 'bottomPosition'>
+            <div id = 'goldCount'>
+                <div class = 'imgHolder'>
+                    <img src="Images/Gold/Gold.png">
+                </div>
+                <div class = 'numHolder'>0</div>
+            </div>
+            <div id = 'stoneCount'>
+                <div class = 'imgHolder'>
+                    <img src="Images/Rock/Rock.png">
+                </div>
+                <div class = 'numHolder'>0</div>
+            </div>
+            <div id = 'woodCount'>
+                <div class = 'imgHolder'>
+                    <img src="Images/Tree/Tree.png">
+                </div>
+                <div class = 'numHolder'>0</div>
+            </div>
+            <div id = 'foodCount'>
+                <div class = 'imgHolder'>
+                    <img src="Images/Bush/Bush.png">
+                </div>
+                <div class = 'numHolder'>0</div>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="canvas"></canvas>
+    
+    <script src="Scripts/Canvas.js"></script>
+    <script src="Classes/Entities/Entity.js"></script>
+    <script src="Classes/Entities/Enemy.js"></script>
+    <script src="Classes/Entities/Player.js"></script>
+    <script src="Classes/Info/HealthBar.js"></script>
+    <script src="Classes/Info/InfoBox.js"></script>
+    <script src="Classes/Info/HoverBox.js"></script>
+    <script src="Classes/Resources/Resource.js"></script>
+    <script src="Classes/Resources/Bush.js"></script>
+    <script src="Classes/Resources/Gold.js"></script>
+    <script src="Classes/Resources/Rock.js"></script>
+    <script src="Classes/Resources/Tree.js"></script>
+    <script src="Classes/Inventory Slots/InventorySlot.js"></script>
+    <script src="Classes/Projectiles/Projectile.js"></script>
+    <script src="Classes/Projectiles/UntargetedProjectile.js"></script>
+    <script src="Classes/Inventory Slots/Buildings/Building.js"></script>
+    <script src="Classes/Inventory Slots/Buildings/Subclasses/Aura.js"></script>
+    <script src="Classes/Inventory Slots/Buildings/Subclasses/Beacon.js"></script>
+    <script src="Classes/Inventory Slots/Buildings/Subclasses/BombTower.js"></script>
+    <script src="Classes/Inventory Slots/Buildings/Subclasses/Bow.js"></script>
+    <script src="Classes/Inventory Slots/Buildings/Subclasses/Cannon.js"></script>
+    <script src="Classes/Inventory Slots/Buildings/Subclasses/Farm.js"></script>
+    <script src="Classes/Inventory Slots/Buildings/Subclasses/GoldMine.js"></script>
+    <script src="Classes/Inventory Slots/Buildings/Subclasses/House.js"></script>
+    <script src="Classes/Inventory Slots/Buildings/Subclasses/Lumberyard.js"></script>
+    <script src="Classes/Inventory Slots/Buildings/Subclasses/Quarry.js"></script>
+    <script src="Classes/Inventory Slots/Buildings/Subclasses/Trap.js"></script>
+    <script src="Classes/Inventory Slots/Buildings/Subclasses/Wall.js"></script>
+    <script src="Classes/Inventory Slots/Weapons/Weapon.js"></script>
+    <script src="Classes/Inventory Slots/Weapons/Subclasses/Machete.js"></script>
+    <script src="Classes/Inventory Slots/Weapons/Subclasses/Sledgehammer.js"></script>
+    <script src="Classes/Inventory Slots/Weapons/Subclasses/Sword.js"></script>
+    <script src="Classes/Inventory Slots/Weapons/Subclasses/Tranquilizer.js"></script>
+    <script src="Classes/Game.js"></script>
+    <script src="Classes/Inventory.js"></script>
+    <script src="Classes/Map.js"></script>
+    <script src="Classes/Render.js"></script>
+    <script src="Classes/Shop.js"></script>
+    <script src="Scripts/animationFunctions.js"></script>
+    <script src="Scripts/positionFunctions.js"></script>
+    <script src="Scripts/functions.js"></script>
+    <script src="Scripts/myLibrary.js"></script>
+    <script src='script.js'></script>
+</body>
+</html>
