@@ -81,7 +81,7 @@ class Projectile {
             Projectile.projectiles.splice(Projectile.projectiles.indexOf(this), 1);
         }
 
-        if(this.x.isNaN() || this.y.isNaN()) {
+        if(isNaN(this.x) || isNaN(this.y)) {
             Projectile.projectiles.splice(Projectile.projectiles.indexOf(this), 1);
         }
     }

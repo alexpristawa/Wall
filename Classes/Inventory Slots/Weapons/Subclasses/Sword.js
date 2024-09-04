@@ -13,7 +13,7 @@ class Sword extends Weapon {
             buildingDamage: 10,
             resourceDamage: 0,
             tba: 500,
-            materialMultiplier: 10000000
+            materialMultiplier: 1
         },
         {
             attackDegrees: 150,

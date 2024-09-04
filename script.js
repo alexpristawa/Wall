@@ -192,6 +192,14 @@ document.addEventListener('mouseup', (event) => {
     cursor.mousedown = false;
 });
 
+let infiniteResources = (makeInfinite = true) => {
+    if(makeInfinite) {
+        Sword.stats[0].materialMultiplier = 1000000;
+    } else {
+        Sword.stats[0].materialMultiplier = 1;
+    }
+}
+
 let animationFunction = () => {
     let rememberPreviousTime;
     if(previousTime == undefined) {
