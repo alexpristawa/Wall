@@ -18,6 +18,7 @@ interactDiv.scrollTop = previousScrollHeight;
 let scrollDiv = document.querySelector('#main > #interact > #scrollCount');
 let deathDisplay = document.querySelector("#main > #deathDisplay");
 let beginFunctionQueue = [];
+let paused = false;
 
 window.addEventListener('wheel', (event) => {
     if(event.ctrlKey) { //Checks if the player is zooming
@@ -138,6 +139,19 @@ document.addEventListener('keydown', (event) => {
     if(key == 'm') {
         interactDiv.scrollTop = window.innerHeight*5;
     }
+    if(key == 'p') {
+        paused = !paused;
+        let pauseButton = document.querySelector('#pauseHolder');
+        let interact = document.querySelector('div#interact');
+        if(!paused) {
+            animationFunction();
+            pauseButton.style.display = 'none';
+            interact.style.backgroundColor = 'transparent';
+        } else {
+            pauseButton.style.display = 'flex';
+            interact.style.backgroundColor = 'rgba(0, 0, 0, 0.4)';
+        }
+    }
     if('1234567890'.indexOf(key) != -1) {
         let index = parseInt(key)-1;
         if(index == -1) index = 9;
@@ -201,6 +215,7 @@ let infiniteResources = (makeInfinite = true) => {
 }
 
 let animationFunction = () => {
+    if(paused) return;
     let rememberPreviousTime;
     if(previousTime == undefined) {
         previousTime = Date.now();
