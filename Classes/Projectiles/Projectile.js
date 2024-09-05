@@ -30,8 +30,10 @@ class Projectile {
 
     update() {
         if(this.target !== undefined) {
-            if(this.target != null && this.target.health <= 0) {
+            if(this.target != null) {
                 this.endGoal = {x: this.target.x, y: this.target.y};
+            }
+            if(this.target != null && this.target.health <= 0) {
                 this.target = null;
             }
         }
@@ -43,6 +45,9 @@ class Projectile {
         } else if(this.target != null) {
             dy = this.target.y-this.y;
             dx = this.target.x-this.x;
+        } else {
+            dy = this.endGoal.y-this.y;
+            dx = this.endGoal.x-this.x;
         }
         [dy, dx] = normalizeSum(dy, dx, this.speed/deltaFrames);
 
