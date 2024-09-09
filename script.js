@@ -148,6 +148,7 @@ document.addEventListener('keydown', (event) => {
             pauseButton.style.display = 'none';
             interact.style.backgroundColor = 'transparent';
         } else {
+            previousTime = undefined;
             pauseButton.style.display = 'flex';
             interact.style.backgroundColor = 'rgba(0, 0, 0, 0.4)';
         }
@@ -213,6 +214,7 @@ let infiniteResources = (makeInfinite = true) => {
         Sword.stats[0].materialMultiplier = 1;
     }
 }
+infiniteResources(true);
 
 let animationFunction = () => {
     if(paused) return;
