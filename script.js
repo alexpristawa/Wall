@@ -244,6 +244,8 @@ let animationFunction = () => {
     Map.updateMap();
     Render.board();
 
+    Message.updateMessages();
+
     previousTime = rememberPreviousTime;
     
     requestAnimationFrame(animationFunction);

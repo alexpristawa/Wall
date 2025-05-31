@@ -1,5 +1,6 @@
 class Gold extends Resource {
 
+    static description = "Gold that can be harvested for gold.";
     static image = new Image();
     static drawRadiusTiles;
 

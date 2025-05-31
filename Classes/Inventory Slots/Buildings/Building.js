@@ -40,9 +40,11 @@ class Building {
 
     static build(x, y) {
         if(House.house == null && this.name != "House") {
+            new Message("You must build a house before building other buildings!", 3000);
             return false;
         }
         if(this.buildLimit != undefined && this.count >= this.buildLimit) {
+            new Message(`You have reached the limit of ${this.buildLimit} ${this.name}s!`, 3000);
             return false;
         }
         if(Player.player.materials.wood >= this.cost[0].wood && Player.player.materials.stone >= this.cost[0].stone && Player.player.materials.food >= this.cost[0].food && Player.player.materials.gold >= this.cost[0].gold) {

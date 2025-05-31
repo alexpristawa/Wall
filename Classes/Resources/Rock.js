@@ -1,5 +1,6 @@
 class Rock extends Resource{
 
+    static description = "Rocks that can be harvested for stone.";
     static radius;
     static buildLimit = 2;
     static count = 0;

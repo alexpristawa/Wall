@@ -1,5 +1,6 @@
 class Bush extends Resource {
 
+    static description = "Bushes that can be harvested for food.";
     static buildLimit = 2;
     static count = 0;
     static image;

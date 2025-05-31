@@ -1,5 +1,6 @@
 class Tree extends Resource{
 
+    static description = "Trees that can be harvested for wood.";
     static buildLimit = 2;
     static count = 0;
     static image;
