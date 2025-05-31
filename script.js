@@ -214,7 +214,6 @@ let infiniteResources = (makeInfinite = true) => {
         Sword.stats[0].materialMultiplier = 1;
     }
 }
-infiniteResources(true);
 
 let animationFunction = () => {
     if(paused) return;

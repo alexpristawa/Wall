@@ -79,6 +79,11 @@ class Projectile {
                 allEnemies.forEach(obj => {obj.hit(this.obj.constructor.stats[this.obj.level-1])});
                 Projectile.projectiles.splice(Projectile.projectiles.indexOf(this), 1);
                 return;
+            } else if (this.target == null && !this.obj.constructor.aoe && this.endGoal && (this.x - this.endGoal.x) ** 2 + (this.y - this.endGoal.y) ** 2 < (this.radius) ** 2) {
+                // Nothing special to do on impact – just delete the bullet
+                Projectile.projectiles.splice(
+                    Projectile.projectiles.indexOf(this), 1);
+                return;
             }
         }
 
