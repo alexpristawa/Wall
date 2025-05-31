@@ -131,6 +131,8 @@ class Player extends Entity {
                                 this.materials[obj.type] = Math.min(2000, this.materials[obj.type]);
                                 if(this.materials[obj.type] == 2000) {
                                     new Message("You must build a house to store more than 2000 resources!", 5000);
+                                } else {
+                                    this.increaseAge(Player.player.materialMultiplier);
                                 }
                             } else {
                                 this.increaseAge(Player.player.materialMultiplier);
