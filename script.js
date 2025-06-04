@@ -13,7 +13,7 @@ let tilesHigh;
 let frame = {};
 let board;
 let interactDiv = document.querySelector("#main > #interact");
-let previousScrollHeight = window.innerHeight*5;
+let previousScrollHeight = window.innerHeight*11;
 interactDiv.scrollTop = previousScrollHeight;
 let scrollDiv = document.querySelector('#main > #interact > #scrollCount');
 let deathDisplay = document.querySelector("#main > #deathDisplay");
@@ -28,7 +28,7 @@ window.addEventListener('wheel', (event) => {
 
 let resizeWindow = (repaint = true) => {
     previousScrollHeight = interactDiv.scrollTop;
-    tilesHigh = (12-interactDiv.scrollTop/window.innerHeight+1)*12;
+    tilesHigh = (12-interactDiv.scrollTop/window.innerHeight+1)*12-6;
     tileWidth = window.innerHeight/tilesHigh;
     Rock.radius = tileWidth * 0.75;
     Rock.radiusTiles = 0.75;
