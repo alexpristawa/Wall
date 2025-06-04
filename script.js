@@ -28,7 +28,7 @@ window.addEventListener('wheel', (event) => {
 
 let resizeWindow = (repaint = true) => {
     previousScrollHeight = interactDiv.scrollTop;
-    tilesHigh = (6-interactDiv.scrollTop/window.innerHeight+1)*6;
+    tilesHigh = (12-interactDiv.scrollTop/window.innerHeight+1)*12;
     tileWidth = window.innerHeight/tilesHigh;
     Rock.radius = tileWidth * 0.75;
     Rock.radiusTiles = 0.75;

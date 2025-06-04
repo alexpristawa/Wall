@@ -59,7 +59,7 @@ body > #main {
 }
 
 #main > #interact > #scrollCount {
-    height: 700vh;
+    height: 1300vh;
     width: 100%;
     pointer-events: all;
     flex-shrink: 0;

@@ -23,10 +23,11 @@ class Resource {
 
     static build(x, y) {
         if(this.count >= this.buildLimit) {
-
+            new Message(`You have reached the limit of ${this.buildLimit} ${this.name}s!`, 3000);
             return false;
         }
         if(House.house != null && Math.abs(x-House.house.x) <= 1 && Math.abs(y-House.house.y) <= 1) {
+            new Message("Resources cannot be built touching your house!");
             return false;
         }
         if(Player.player.materials.wood >= this.cost.wood && Player.player.materials.stone >= this.cost.stone && Player.player.materials.food >= this.cost.food) {

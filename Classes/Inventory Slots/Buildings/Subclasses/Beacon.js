@@ -86,7 +86,7 @@ class Beacon extends Building {
         let y = this.target.y;
         Render.queue[10].push(() => {
             ctx.strokeStyle = `rgb(${arr1[0]*r1+arr2[0]*r2},${arr1[1]*r1+arr2[1]*r2},${arr1[2]*r1+arr2[2]*r2})`;
-            ctx.lineWidth = 7;
+            ctx.lineWidth = tileWidth*0.15;
             Canvas.line((x-frame.sx)*tileWidth, (y-frame.sy)*tileWidth, (this.x-frame.sx)*tileWidth, (this.y-frame.sy)*tileWidth, 5);
         });
     }
