@@ -1,0 +1,25 @@
+{
+  "name": "wall",
+  "version": "1.0.0",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexpristawa/Wall.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/alexpristawa/Wall/issues"
+  },
+  "homepage": "https://github.com/alexpristawa/Wall#readme",
+  "description": "",
+  "dependencies": {
+    "ws": "^8.18.2"
+  }
+}

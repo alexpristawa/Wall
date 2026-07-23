@@ -1,7 +1,7 @@
 class Game {
 
     static isDay = true;
-    static dayLength = 120;
+    static dayLength = 240;
     static nightCount = 0;
     static shader = document.querySelector('div#main');
     static nightDisplay = document.querySelector("#nightDisplayHolder > #nightDisplay");

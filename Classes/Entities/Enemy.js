@@ -41,7 +41,7 @@ class Enemy extends Entity {
     }
 
     static sort() {
-        for(let i = 1; i < Enemy.enemies.length-1; i++) {
+        for(let i = 1; i < Enemy.enemies.length; i++) {
             let obj = Enemy.enemies[i];
             let j = i-1;
             while(j >= 0 && obj.x < Enemy.enemies[j].x) {
