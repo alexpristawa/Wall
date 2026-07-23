@@ -1,7 +1,8 @@
 class Game {
 
     static isDay = true;
-    static dayLength = 240;
+    static dayLength = 120;
+    static nightLength = 60;
     static nightCount = 0;
     static shader = document.querySelector('div#main');
     static nightDisplay = document.querySelector("#nightDisplayHolder > #nightDisplay");
@@ -11,20 +12,21 @@ class Game {
     static updateGame() {
         if(gameTime != undefined) {
             gameTime += deltaTime/1000;
-            Game.nightDisplay.style.transform = `rotate(${360*(gameTime/Game.dayLength)}deg)`;
-            Game.nightDisplay.querySelector('i.fa-moon').style.transform = `rotate(${-360*(gameTime/Game.dayLength)}deg)`;
-            Game.nightDisplay.querySelector('i.fa-sun').style.transform = `rotate(${-360*(gameTime/Game.dayLength)}deg)`;
-            if(gameTime > Game.dayLength) {
-                gameTime %= Game.dayLength;
+            if(gameTime > Game.dayLength+Game.nightLength) {
+                gameTime %= Game.dayLength+Game.nightLength;
                 Game.setDay();
-
-            } else if(gameTime > Game.dayLength/2) {
+            }
+            let rotation = gameTime <= Game.dayLength ? 180*gameTime/Game.dayLength : 180+180*(gameTime-Game.dayLength)/Game.nightLength;
+            Game.nightDisplay.style.transform = `rotate(${rotation}deg)`;
+            Game.nightDisplay.querySelector('i.fa-moon').style.transform = `rotate(${-rotation}deg)`;
+            Game.nightDisplay.querySelector('i.fa-sun').style.transform = `rotate(${-rotation}deg)`;
+            if(gameTime > Game.dayLength) {
                 if(Game.isDay) {
                     Game.setNight();
                 } else {
-                    if(gameTime - Game.dayLength/2 > 1.5) {
+                    if(gameTime - Game.dayLength > 1.5) {
                         let oldCount = Math.floor(Game.wave.count);
-                        Game.wave.count = Math.min((gameTime - Game.dayLength/2)/Game.wave.spreadTime*Game.wave.total, Game.wave.total);
+                        Game.wave.count = Math.min((gameTime - Game.dayLength)/Game.wave.spreadTime*Game.wave.total, Game.wave.total);
                         while(oldCount < Math.floor(Game.wave.count)) {
                             let remainingNum = randomNumber(1, Game.wave.total-oldCount);
                             let i = 0;
@@ -74,7 +76,7 @@ class Game {
         Game.wave = {
             total: 50 * Game.nightCount,
             count: 0,
-            spreadTime: Game.dayLength/4,
+            spreadTime: Game.nightLength/2,
             types: []
         }
         if(Game.nightCount%5 == 0) {
